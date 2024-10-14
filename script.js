@@ -29,9 +29,13 @@ function updateFill(value, direction) {
   if (direction === 'up') {
     fill.style.top = `auto`;
     fill.style.bottom = `50%`; // Fill from the bottom upward
+    fill.classList.add('up');
+    fill.classList.remove('down');
   } else if (direction === 'down') {
     fill.style.top = `50%`; // Fill from the top downward
     fill.style.bottom = `auto`;
+    fill.classList.add('down');
+    fill.classList.remove('up');
   }
 }
 
