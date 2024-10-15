@@ -1,18 +1,14 @@
-const slider = document.getElementById('verticalSlider');
-const positiveValue = document.getElementById('positiveValue');
-const negativeValue = document.getElementById('negativeValue');
-const fill = document.querySelector('.slider-fill');
-
-// Function to update displayed values and color fill
-function updateValues(value) {
+// Function to update displayed values and color fill for a specific slider
+function updateValues(slider, positiveValue, negativeValue, fill) {
+  const value = slider.value;
   if (value > 50) {
     positiveValue.textContent = value;
     negativeValue.textContent = "50"; // Fixed center value for bottom
-    updateFill(value, 'up'); // Fill when moving up
+    updateFill(value, 'up', fill); // Fill when moving up
   } else if (value < 50) {
     positiveValue.textContent = "50"; // Fixed center value for top
     negativeValue.textContent = value;
-    updateFill(value, 'down'); // Fill when moving down
+    updateFill(value, 'down', fill); // Fill when moving down
   } else {
     positiveValue.textContent = "50";
     negativeValue.textContent = "50";
@@ -20,10 +16,9 @@ function updateValues(value) {
   }
 }
 
-// Function to update the fill height based on direction
-function updateFill(value, direction) {
+// Function to update the fill height based on direction for a specific slider
+function updateFill(value, direction, fill) {
   let fillPercentage = Math.abs(value - 50); // Remove the scaling factor
-
   fill.style.height = `${fillPercentage}%`;
 
   if (direction === 'up') {
@@ -39,10 +34,18 @@ function updateFill(value, direction) {
   }
 }
 
-// Initialize with default value
-updateValues(slider.value);
+// Initialize and set up event listeners for each slider
+for (let i = 1; i <= 5; i++) {
+  const slider = document.getElementById(`verticalSlider${i}`);
+  const positiveValue = document.getElementById(`positiveValue${i}`);
+  const negativeValue = document.getElementById(`negativeValue${i}`);
+  const fill = slider.parentElement.querySelector('.slider-fill');
 
-// Update on input
-slider.addEventListener('input', () => {
-  updateValues(slider.value);
-});
+  // Initialize with default value
+  updateValues(slider, positiveValue, negativeValue, fill);
+
+  // Update on input
+  slider.addEventListener('input', () => {
+    updateValues(slider, positiveValue, negativeValue, fill);
+  });
+}
