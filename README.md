@@ -21,3 +21,7 @@ This project implements a vertical range slider where the slider starts from the
 1. Clone the repository:
    ```bash
    git clone https://github.com/your-username/vertical-range-slider.git
+
+   ```
+
+Happy coding!
